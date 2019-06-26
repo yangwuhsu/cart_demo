@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        .pro-product{
+            width:200px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="pro-container">
+        <div class="pro-product">
+            <img class="pro__product__image" src="img/products/beer.svg" alt="Beer">
+            <h2 class="pro__product__name">Beer</h2>
+            <h3 class="pro__product__price">6.00</h3>
+            <button class="btn btn--primary" data-action="PRO_ADD_TO_CART">Add To Cart</button>
+        </div>
+    </div>
+
+    <script>
+   
+        // 讓 proItems 讀取 localStorage 的資料，沒有的話給予空陣列
+        const cartItems = JSON.parse(localStorage.getItem('items'));
+        // console.log(cartItems);
+        
+
+        // 查詢加入購物車按鈕
+        const proAddToCartBtn = document.querySelector('[data-action="PRO_ADD_TO_CART"]');
+        // 查詢商品資訊容器
+        const proProductDOM = document.querySelector('.pro-product');
+        // 查詢商品資料
+        const proProductContent = {
+                image:proProductDOM.querySelector('.pro__product__image').src,
+                name:proProductDOM.querySelector('.pro__product__name').innerText,
+                price:proProductDOM.querySelector('.pro__product__price').innerText,
+            }
+        // 商品加到購物車監聽事件
+        proAddToCartBtn.addEventListener('click',proAddToCart);
+       
+        // 比對本頁商品是否已存在localstorage
+        if(cartItems !== null){
+                cartItems.forEach(cartItem => {
+                if(cartItem.name === proProductContent.name){
+                    proAddToCartBtn.innerText= 'In Cart';
+                }
+            });
+        }
+            
+        // 如果此頁商品不在本地資料庫，則可存入資料庫
+        function proAddToCart(){
+            if( proAddToCartBtn.innerText !== 'In Cart'){
+                localStorage.setItem('ProItems',JSON.stringify(proProductContent));
+                console.log(localStorage.getItem('ProItems'));
+                proAddToCartBtn.innerText = 'In Cart';
+            }
+        }
+    
+    
+    </script>
+</body>
+</html>

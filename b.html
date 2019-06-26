@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div class="pro-container">
+                <div class="pro-product">
+                    <img class="pro__product__image" src="img/products/beer.svg" alt="Beer">
+                    <h2 class="pro__product__name">Beer</h2>
+                    <h3 class="pro__product__price">6.00</h3>
+                    <button class="btn btn--primary" data-action="PRO_ADD_TO_CART">Add To Cart</button>
+                </div>
+            </div>
+        
+            <script>
+                const aaa={};
+                console.log("aaa:"+aaa);
+                const proAddToCartBtn = document.querySelector('[data-action="PRO_ADD_TO_CART"]');
+            
+                proAddToCartBtn.addEventListener('click',proAddToCart);
+                BtnAnser = localStorage.getItem('checkBtn');
+                console.log(typeof(BtnAnser));
+                console.log(BtnAnser);
+                if(BtnAnser==="In Cart"){
+                    proAddToCartBtn.innerText = 'In Cart';
+                }
+                function proAddToCart(){
+                    if(BtnAnser!== "In Cart"){
+                        const proProductDOM = document.querySelector('.pro-product');
+                        const proProductContent = {
+                            image:proProductDOM.querySelector('.pro__product__image').src,
+                            name:proProductDOM.querySelector('.pro__product__name').innerText,
+                            price:proProductDOM.querySelector('.pro__product__price').innerText,
+                        }
+                        console.log(proProductContent);
+                        localStorage.setItem('proItem',JSON.stringify(proProductContent));
+                    }
+                }
+
+                
+            
+            
+            </script>
+</body>
+</html>
